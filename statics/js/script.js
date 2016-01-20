@@ -1,3 +1,4 @@
+var WEB = "http://127.0.0.1:8888/"
 
 $(document).ready(function(){
     $("#login").click(function(){
@@ -18,7 +19,7 @@ $(document).ready(function(){
                 cache: false,
                 success: function(e){
                     if (e=="1"){
-                        location.href="http://127.0.0.1:8888/listenwrite?user=" + username
+                        location.href= WEB + "admin?user=" + username
                     }else if (e=="0"){
                         alert("username or passwor is false.")
                     }else {

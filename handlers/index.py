@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # coding=utf-8
 
-from conndb.db import *
 import tornado.web
 
 import sys
@@ -13,7 +12,8 @@ class IndexHandler(tornado.web.RequestHandler):
     the index page of website.
     """
     def get(self):
-        self.render("index.html")
+        #self.render("login.html")
+        self.render("admin_courses.html")
 
     def post(self):
         """
@@ -35,14 +35,3 @@ class IndexHandler(tornado.web.RequestHandler):
         except:
             self.write("-1")
         
-class ListenWriteHandler(tornado.web.RequestHandler):
-    def get(self):
-        user_name = self.request.uri.split("=")[-1]
-        self.render("listenwrite.html", username = user_name)
-
-    def post(self):
-        audio_name = self.get_argument("audioname")
-        audio_text = self.get_argument("audiotext")
-
-        print audio_text
-        self.write("1")

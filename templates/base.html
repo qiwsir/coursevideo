@@ -3,9 +3,25 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Reverse Learning English</title>
+    <title>Learning</title>
     <link rel="stylesheet" type="text/css" href="{{static_url('css/style.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{static_url('css/wmd.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{static_url('css/amazeui.min.css')}}">
+    <link rel="alternate icon" type="image/png" href="{{static_url('images/favicon.png')}}">
+    <link rel="apple-touch-icon-precomposed" href="{{static_url('images/app-icon72x72@2x.png')}}">
+    <link rel="stylesheet" type="text/css" href="{{static_url('css/admin.css')}}">
+    <style>
+        .header {
+           text-align: center;
+        }
+        .header h1 {
+            font-size: 200%;
+            color: #333;
+            margin-top: 30px;
+        }
+        .header p {
+            font-size: 14px;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -14,9 +30,14 @@
     <content>
         {% block body %}{% end %}
     </content>
-    <footer>
-        {% set website = "<a href='http://www.itdiffer.com'>WELCOME TO MY WEBSITE</a>" %}
-        {% raw website %}
+    <footer class="am-g">
+        <br>
+        <hr>
+        <div class="header">
+            <p>易水禾运动科技</p>
+        </div>
+       <!-- {% set website = "<a href='http://www.itdiffer.com'>WELCOME TO MY WEBSITE</a>" %}
+        {% raw website %}-->
     </footer>
     <script src="{{static_url("js/jquery.min.js")}}"></script>
     <script src="{{static_url("js/script.js")}}"></script>
