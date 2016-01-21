@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block header %}
+
+{% end %}
+
+{% block body %}
+
+<div class="am-g">
+  <div class="am-u-lg-6 am-u-md-8 am-u-sm-centered">
+    <h3>增加新的场馆</h3>
+    <hr>
+    <div class="am-btn-group">
+      <!--a href="#" class="am-btn am-btn-secondary am-btn-sm"><i class="am-icon-github am-icon-sm"></i> Github</a>
+      <a href="#" class="am-btn am-btn-success am-btn-sm"><i class="am-icon-google-plus-square am-icon-sm"></i> Google+</a>
+      <a href="#" class="am-btn am-btn-primary am-btn-sm"><i class="am-icon-stack-overflow am-icon-sm"></i> stackOverflow</a-->
+    </div>
+
+    <form class="am-form">
+      <div class="linespace">
+        <label class="am-u-sm-3 am-form-label text-right" >场馆名称:</label>
+        <div class="am-u-sm-9">
+          <input type="text" name="" id="orgname" value="">
+        </div>
+      </div>
+      <br>
+      <div class="linespace">
+        <label class="am-u-sm-3 am-form-label text-right">联系人:</label>
+        <div class="am-u-sm-9">
+          <input type="text" name="" id="orgperson" value="">
+        </div>
+      </div>
+      <br>
+      <div class="linespace">
+        <label class="am-u-sm-3 am-form-label text-right">手机号:</label>
+        <div class="am-u-sm-9">
+          <input type="text" name="" id="orgphone" value="">
+        </div>
+      </div>
+      <br>
+      <div class="linespace">
+        <label class="am-u-sm-3 am-form-label text-right">详细地址:</label>
+        <div class="am-u-sm-9">
+          <input type="text" name="" id="orgaddress" value="">
+        </div>
+    </div>
+      <br />
+      <div style="text-align:right; margin-top:25px;">
+        <input class="am-btn am-btn-default am-btn-sm am-fr" type="submit" name="" id="addorg" value="增加本场馆" >
+      </div>
+    </form>
+  </div>
+</div>
+
+{% end %}

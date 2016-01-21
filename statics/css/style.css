@@ -1,4 +1,14 @@
 
-body {
-    color: red;
+.linespace {
+    margin:15px auto;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.center {
+    margin-right: auto;
+    margin-left: auto;
+    text-align: center;
 }

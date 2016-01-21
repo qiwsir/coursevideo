@@ -1,0 +1,176 @@
+{% extends "base.html" %}
+
+{% block header %}
+<header class="am-topbar admin-header">
+  <div class="am-topbar-brand">
+    <strong>Sports Course</strong> <small>后台管理</small>
+  </div>
+
+  <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only" data-am-collapse="{target: '#topbar-collapse'}"><span class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span></button>
+
+  <div class="am-collapse am-topbar-collapse" id="topbar-collapse">
+
+    <ul class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list">
+      <li class="am-dropdown" data-am-dropdown>
+        <a class="am-dropdown-toggle" data-am-dropdown-toggle href="javascript:;">
+          <span class="am-icon-users"></span> 管理员 <span class="am-icon-caret-down"></span>
+        </a>
+        <ul class="am-dropdown-content">
+          <li><a href="#"><span class="am-icon-user"></span> 资料</a></li>
+          <li><a href="#"><span class="am-icon-cog"></span> 设置</a></li>
+          <li><a href="#"><span class="am-icon-power-off"></span> 退出</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</header>
+{% end %}
+
+{% block body %}
+
+<!--[if lte IE 9]>
+<p class="browsehappy">你正在使用<strong>过时</strong>的浏览器，Amaze UI 暂不支持。 请 <a href="http://browsehappy.com/" target="_blank">升级浏览器</a>
+  以获得更好的体验！</p>
+<![endif]-->
+
+<div class="am-cf admin-main">
+  <!-- sidebar start -->
+  <div class="admin-sidebar am-offcanvas" id="admin-offcanvas">
+    <div class="am-offcanvas-bar admin-offcanvas-bar">
+      <ul class="am-list admin-sidebar-list">
+        <li><a href="/login"><span class="am-icon-home"></span> 首页</a></li>
+        <li><a href="/org"><span class="am-icon-table"></span> 场馆管理</a></li>
+        <li><a href="admin_courses.html"><span class="am-icon-table"></span> 课程管理</a></li>
+        <li><a href="#"><span class="am-icon-sign-out"></span> 注销</a></li>
+      </ul>
+
+      <div class="am-panel am-panel-default admin-sidebar-panel">
+        <div class="am-panel-bd">
+          <p><span class="am-icon-bookmark"></span> 公告</p>
+          <p>如果操作中遇到问题，请与本系统开发者联系。</p>
+        </div>
+      </div>
+
+      <div class="am-panel am-panel-default admin-sidebar-panel">
+        <div class="am-panel-bd">
+          <p><span class="am-icon-tag"></span> wiki</p>
+          <p>避免在不安全的环境中上网</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- sidebar end -->
+
+  <!-- content start -->
+  <div class="admin-content">
+
+    <div class="am-cf am-padding">
+      <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">场馆列表</strong></div>
+    </div>
+
+    <div class="am-g">
+      <div class="am-u-sm-12 am-u-md-6">
+        <div class="am-btn-toolbar">
+          <div class="am-btn-group am-btn-group-xs">
+            <button id="neworg" type="button" class="am-btn am-btn-default"><span class="am-icon-plus"></span> 新增</button>
+            <button type="button" class="am-btn am-btn-default"><span class="am-icon-trash-o"></span> 删除</button>
+          </div>
+        </div>
+      </div>
+      <div class="am-u-sm-12 am-u-md-3">
+        <div class="am-input-group am-input-group-sm">
+          <input type="text" class="am-form-field">
+          <span class="am-input-group-btn">
+            <button class="am-btn am-btn-default" type="button">搜索</button>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="am-g">
+      <div class="am-u-sm-12">
+        <form class="am-form">
+          <table class="am-table am-table-striped am-table-hover table-main">
+            <thead>
+              <tr>
+                <th class="table-check"><input type="checkbox" /></th><th class="table-id">ID</th><th class="table-title">场馆名称</th><th class="table-date am-hide-sm-only">开始日期</th><th class="table-date am-hide-sm-only">终止日期</th><th class="table-set">操作</th>
+              </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><input type="checkbox" /></td>
+              <td>1</td>
+              <td>苏州工业园区文星台球</td>
+              <td class="am-hide-sm-only">2015年1月1日</td>
+              <td class="am-hide-sm-only">2016年9月4日</td>
+              <td>
+                <div class="am-btn-toolbar">
+                  <div class="am-btn-group am-btn-group-xs">
+                    <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o"></span> 编辑</button>
+                    <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</button>
+                    <button class="am-btn am-btn-default am-btn-xs am-hide-sm-only">开通<span class="am-icon-copy"></span> </button>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td><input type="checkbox" /></td>
+              <td>1</td>
+              <td>苏州工业园区文星台球</td>
+              <td class="am-hide-sm-only">2015年1月1日</td>
+              <td class="am-hide-sm-only">2016年9月4日</td>
+              <td>
+                <div class="am-btn-toolbar">
+                  <div class="am-btn-group am-btn-group-xs">
+                    <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o"></span> 编辑</button>
+                    <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</button>
+                    <button class="am-btn am-btn-default am-btn-xs am-hide-sm-only">开通<span class="am-icon-copy"></span> </button>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            
+          </tbody>
+        </table>
+          <div class="am-cf">
+  共 15 条记录
+  <div class="am-fr">
+    <ul class="am-pagination">
+      <li class="am-disabled"><a href="#">«</a></li>
+      <li class="am-active"><a href="#">1</a></li>
+      <li><a href="#">2</a></li>
+      <li><a href="#">3</a></li>
+      <li><a href="#">4</a></li>
+      <li><a href="#">5</a></li>
+      <li><a href="#">»</a></li>
+    </ul>
+  </div>
+</div>
+          <hr />
+          <p>注：.....</p>
+        </form>
+      </div>
+
+    </div>
+  </div>
+  <!-- content end -->
+</div>
+
+
+<script src="{{static_url('js/jquery.min.js')}}"></script>
+<script src="{{static_url('js/amazeui.min.js')}}"></script>
+<script src="{{static_url('js/app.js')}}"></script>
+<script src="{{static_url('js/layer.js')}}"></script>
+<script>
+    $("#neworg").on("click", function(){
+            layer.open({
+                type: 2,
+                title: '添加新的场馆',
+                shadeClose: true,
+                shade: 0.8,
+                area: ['800px', '600px'],
+                content: 'http://www.itdiffer.com/'
+                });
+            });
+</script>
+{% end %}
