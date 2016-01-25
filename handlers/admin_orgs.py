@@ -9,8 +9,7 @@ sys.setdefaultencoding("utf-8")
 
 class AdminOrgHandler(tornado.web.RequestHandler):
     def get(self):
-        self.render("admin_neworg.html")
-        #self.render("admin_orgs.html")
+        self.render("admin_orgs.html")
 
     def post(self):
         """
@@ -31,4 +30,7 @@ class AdminOrgHandler(tornado.web.RequestHandler):
                 self.write("0")
         except:
             self.write("-1")
-        
+       
+class AdminNewOrgHandler(tornado.web.RequestHandler):
+    def get(self):
+        self.render("admin_neworg.html")
