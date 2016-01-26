@@ -8,9 +8,11 @@ sys.setdefaultencoding('utf-8')
 from handlers.index import IndexHandler
 from handlers.login import LoginHandler
 from handlers.admin_orgs import AdminOrgHandler
+from handlers.admin_orgs import AdminNewOrgHandler
 
 url=[
     (r'/', IndexHandler),
     (r'/login', LoginHandler),
     (r"/org", AdminOrgHandler),
+    (r'/neworg', AdminNewOrgHandler),
     ]
