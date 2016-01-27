@@ -17,29 +17,22 @@ class AdminOrgHandler(tornado.web.RequestHandler):
         """
         display the webpage, list all of the orgnazations.
         """
+        orgs_info = selectData("orgs", "name", "person", "phone", "wechat")
         
-        self.render("admin_orgs.html")
+        self.render("admin_orgs.html", orgs=orgs_info)
 
     def post(self):
         """
-        user login the website.
+        delete the orgnazation.
         """
-        user_name = self.get_argument("username")
-        user_pwd = self.get_argument("password")
+        org_name = self.get_argument("orgname")
         
-        if user_name and user_pwd:
-            sql = "select * from users where username='{0}'".format(user_name)
+        if deleteLine("orgs", name=org_name):
+            print "delete"
+            self.write("1")
+        else:
+            self.write("0")
 
-        try:
-            cur.execute(sql)
-            password_in = cur.fetchone()[2]
-            if user_pwd == password_in:
-                self.write("1")
-            else:
-                self.write("0")
-        except:
-            self.write("-1")
-       
 class AdminNewOrgHandler(tornado.web.RequestHandler):
     """
     add new orgnazations
@@ -56,10 +49,14 @@ class AdminNewOrgHandler(tornado.web.RequestHandler):
         org_phone = self.get_argument("orgphone")
         org_wechat = self.get_argument("orgwechat")
         org_address = self.get_argument("orgaddress")
-
-        try:
-            insertData("orgs", name=org_name, person=org_person, phone=org_phone, wechat=org_wechat, address=org_address)
-            self.write("1")
-        except:
-            self.write("0")
+        
+        result = selectDataWhere("orgs", "id", name=org_name)
+        if result:
+            self.write("-1")
+        else:
+            try:
+                insertData("orgs", name=org_name, person=org_person, phone=org_phone, wechat=org_wechat, address=org_address)
+                self.write("1")
+            except:
+                self.write("0")
     

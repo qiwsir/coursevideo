@@ -97,40 +97,25 @@
               </tr>
           </thead>
           <tbody>
+            {% for org in orgs %}
             <tr>
               <td><input type="checkbox" /></td>
-              <td>1</td>
-              <td>苏州工业园区文星台球</td>
-              <td class="am-hide-sm-only">送过亲</td>
-              <td class="am-hide-sm-only">13234566433</td>
-              <td class="am-hide-sm-only">13234566433</td>
+              <td>{{orgs.index(org)+1}}</td>
+              <td id="orgname">{{ org[0] }}</td>
+              <td class="am-hide-sm-only">{{org[1]}}</td>
+              <td class="am-hide-sm-only">{{org[2]}}</td>
+              <td class="am-hide-sm-only">{{org[3]}}</td>
               <td>
                 <div class="am-btn-toolbar">
                   <div class="am-btn-group am-btn-group-xs">
                     <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o"></span> 编辑</button>
-                    <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</button>
+                    <button onclick="delOrg(this)" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</button>
                     <button class="am-btn am-btn-default am-btn-xs am-hide-sm-only">开通<span class="am-icon-copy"></span> </button>
                   </div>
                 </div>
               </td>
             </tr>
-            <tr>
-              <td><input type="checkbox" /></td>
-              <td>1</td>
-              <td>苏州工业园区文星台球</td>
-              <td class="am-hide-sm-only">2015年1月1日</td>
-              <td class="am-hide-sm-only">2016年9月4日</td>
-              <td class="am-hide-sm-only">2016年9月4日</td>
-              <td>
-                <div class="am-btn-toolbar">
-                  <div class="am-btn-group am-btn-group-xs">
-                    <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o"></span> 编辑</button>
-                    <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</button>
-                    <button class="am-btn am-btn-default am-btn-xs am-hide-sm-only">开通<span class="am-icon-copy"></span> </button>
-                  </div>
-                </div>
-              </td>
-            </tr>
+            {% end %}
             
           </tbody>
         </table>
