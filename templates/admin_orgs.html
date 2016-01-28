@@ -72,8 +72,7 @@
       <div class="am-u-sm-12 am-u-md-6">
         <div class="am-btn-toolbar">
           <div class="am-btn-group am-btn-group-xs">
-            <button id="neworg" type="button" class="am-btn am-btn-default"><span class="am-icon-plus"></span> 新增</button>
-            <button type="button" class="am-btn am-btn-default"><span class="am-icon-trash-o"></span> 删除</button>
+            <a id="neworg" type="button" class="am-btn am-btn-default"><span class="am-icon-plus"></span> 新增</a>
           </div>
         </div>
       </div>
@@ -108,9 +107,9 @@
               <td>
                 <div class="am-btn-toolbar">
                   <div class="am-btn-group am-btn-group-xs">
-                    <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o"></span> 编辑</button>
-                    <button onclick="delOrg(this)" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</button>
-                    <button class="am-btn am-btn-default am-btn-xs am-hide-sm-only">开通<span class="am-icon-copy"></span> </button>
+                    <a onclick="editOrg(this)" class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o"></span> 编辑</a>
+                    <a onclick="delOrg(this)" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</a>
+                    <a class="am-btn am-btn-default am-btn-xs am-hide-sm-only">开通<span class="am-icon-copy"></span> </a>
                   </div>
                 </div>
               </td>
@@ -159,5 +158,54 @@
                 content: '/neworg'
                 });
             });
+
+//删除场馆
+function delOrg(thisObj){
+    var $td = $(thisObj).parents('tr').children("td");
+    var orgname = $td.eq(2).text();
+    //layer.msg("删除了“"+orgname+"”。");
+    layer.confirm("你正在准备删除："+orgname, {
+            btn: ["删除", "取消删除"]
+            }, function(){
+            delName(orgname);
+            }, function(){
+            layer.msg("已经取消删除了")
+            });
+}
+
+function delName(name){
+    delorg = {"orgname": name}
+    $.ajax({
+        type: "post",
+        url: "/org",
+        data: delorg,
+        success: function(e){
+            if (e=="1"){
+                location.reload();
+            } else {
+                layer.msg("它很顽固，没能够删除。")
+            }
+        }
+
+    });
+}
+
+//编辑场馆信息
+function editOrg(thisObj){
+    var $td = $(thisObj).parents('tr').children("td");
+    var orgname = $td.eq(2).text();
+    //popWin.showWin("800", '600', "编辑场馆", "http://www.baidu.com");
+    //window.open('/editorg?orgname='+orgname);
+            layer.open({
+                type: 2,
+                title: '添加新的场馆',
+                shadeClose: true,
+                shade: 0.8,
+                area: ['800px', '600px'],
+                content: '/editorg?orgname='+orgname
+                });
+    
+}
+
 </script>
 {% end %}

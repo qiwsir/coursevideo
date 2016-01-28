@@ -28,7 +28,6 @@ class AdminOrgHandler(tornado.web.RequestHandler):
         org_name = self.get_argument("orgname")
         
         if deleteLine("orgs", name=org_name):
-            print "delete"
             self.write("1")
         else:
             self.write("0")
@@ -59,4 +58,16 @@ class AdminNewOrgHandler(tornado.web.RequestHandler):
                 self.write("1")
             except:
                 self.write("0")
-    
+   
+class AdminEditOrgHandler(tornado.web.RequestHandler):
+    """
+    edit the information of the orgnazations
+    """
+    def get(self):
+        org_name = self.get_argument("orgname")
+        org_info = selectDataWhere("orgs", "address", "person", "phone", "wechat", name=org_name)
+
+        self.render("admin_editorg.html", orgname=org_name, orginfo=org_info[0])
+
+    def post(self):
+        pass

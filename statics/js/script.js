@@ -108,41 +108,6 @@ $(document).ready(function(){
     })
 })
 
-//删除场馆
-function delOrg(thisObj){
-    var $td = $(thisObj).parents('tr').children("td");
-    var orgname = $td.eq(2).text();
-    
-   // layer.confirm("你确定要删除“"+orgname+"”吗？",{
-   //     btn: ["确定删除", "不删除"]    //按钮
-   // }, function(){                     //删除操作
-        delName(orgname);
-   // },function(){                      //不删除操作
-   //     layer.msg("没有删除“"+orgname+"”。");
-   // });
-}
-
-function delName(name){
-    delorg = {"orgname": name}
-    $.ajax({
-        type: "post",
-        url: "/org",
-        data: delorg,
-        success: function(e){
-            if (e=="1"){
-                alert("have deleted")
-                layer.msg("已经删除该场馆了。")
-            } else {
-                layer.msg("它很顽固，没能够删除。")
-            }
-        }
-
-    });
-}
-//编辑场馆信息
-
-//查看场馆详细内容
-
 
 $(document).ready(function(){
     $("#submitcategory").click(function(){
