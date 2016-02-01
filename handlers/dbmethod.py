@@ -51,5 +51,26 @@ def deleteLine(tablename, **condition):
     except:
         return False
 
+
+def updateLineWhere(table, updatething, condition):
+    """
+    update the table, updatething is a dict, condition is alse a dict.
+    """
+    sql = "update " + table + " set " + dictKeyEqualValue(updatething) + " where " + dictKeyEqualValue(condition)
+    try:
+        cur.execute(sql)
+        conn.commit()
+        return True
+    except:
+        return False
+
+def dictKeyEqualValue(condition):
+    values = [ "'" + str(i) + "'" for i in condition.values() ]
+    wheres = ", ".join([ "=".join(one) for one in zip(condition.keys(), values) ])
+    return wheres
+
 if __name__ == "__main__":
-    print selectDataWhere("orgs", "id", wechat="jjjj")
+    one = 1
+    two = 2
+    c = {"a":one, "b":two}
+    print dictKeyEqualValue(c)

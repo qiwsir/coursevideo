@@ -9,17 +9,20 @@ import sys
 reload(sys)
 sys.setdefaultencoding("utf-8")
 
-class AdminOrgHandler(tornado.web.RequestHandler):
+class AdminUserHandler(tornado.web.RequestHandler):
     """
-    the list of orgnazations, you can add new, delete, set time and so on.
+    the list of users, you can add new, delete, set time and so on.
     """
     def get(self):
         """
-        display the webpage, list all of the orgnazations.
+        display the webpage, list all of the users.
         """
-        orgs_info = selectData("orgs", "name", "person", "phone", "wechat", "id")
-        orgs_info_reverse = orgs_info[::-1] 
-        self.render("admin_orgs.html", orgs=orgs_info_reverse)
+        users_info = selectData("users", "mobilephone", "name", "orgnameID", "status", "id")
+        orgids = [i[2] for i in users_info]
+        orgnames = [selectDataWhere("orgs", "name", id=i) for i in orgids]
+        
+        users_info_reverse = users_info[::-1] 
+        self.render("admin_users.html", users=users_info_reverse, orgs=orgnames.reverse())
 
     def post(self):
         """
@@ -32,12 +35,12 @@ class AdminOrgHandler(tornado.web.RequestHandler):
         else:
             self.write("0")
 
-class AdminNewOrgHandler(tornado.web.RequestHandler):
+class AdminNewUserHandler(tornado.web.RequestHandler):
     """
-    add new orgnazations
+    add new user
     """
     def get(self):
-        self.render("admin_neworg.html")
+        self.render("admin_newuser.html")
     
     def post(self):
         """
