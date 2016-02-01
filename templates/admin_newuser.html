@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block header %}
+
+{% end %}
+
+{% block body %}
+
+<div class="am-g">
+  <div class="am-u-lg-6 am-u-md-8 am-u-sm-centered">
+
+    <form class="am-form">
+      <div class="linespace">
+        <label class="am-u-sm-3 am-form-label text-right" >手机号:</label>
+        <div class="am-u-sm-9">
+            <input type="text" name="" id="mobilephone" value="">
+        </div>
+      </div>
+      <br>
+      <div class="linespace">
+        <label class="am-u-sm-3 am-form-label text-right">姓名:</label>
+        <div class="am-u-sm-9">
+          <input type="text" name="" id="username" value="">
+        </div>
+      </div>
+      <br>
+      <div class="linespace">
+        <label class="am-u-sm-3 am-form-label text-right">登录密码:</label>
+        <div class="am-u-sm-9">
+          <input type="text" name="" id="password" value="">
+        </div>
+      </div>
+      <br>
+      <div class="linespace">
+        <label class="am-u-sm-3 am-form-label text-right">所在场馆:</label>
+        <div class="am-u-sm-9">
+          <input type="text" name="" id="userorg" value="">
+        </div>
+      </div>
+      <br>
+      <div class="linespace">
+        <label class="am-u-sm-3 am-form-label text-right">开始时间:</label>
+        <div class="am-u-sm-9">
+          <input type="text" name="" id="starttime" value="">
+        </div>
+      </div>
+      <br>
+      <div class="linespace">
+        <label class="am-u-sm-3 am-form-label text-right">结束时间:</label>
+        <div class="am-u-sm-9">
+          <input type="text" name="" id="endtime" value="">
+        </div>
+      </div>
+      <br />
+      <div style="text-align:right; margin-top:25px;">
+          <a class="am-btn am-btn-default am-btn-sm am-fr" id="adduser">增加本用户</a>
+      </div>
+    </form>
+  </div>
+  <br/>
+  <br/>
+  <div class="center" id="message"><p>注意：手机号作为用户登录名</p>
+  </div>
+</div>
+
+{% end %}

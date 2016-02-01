@@ -89,8 +89,11 @@ $(document).ready(function(){
                 async: false,
                 success: function(e){
                     if (e=="1"){
-                        layer.msg("恭喜！添加成功。还可以继续添加。");
-                        location.reload();
+                        layer.msg("恭喜！添加成功。。",{
+                            time: 1000
+                        },function(){
+                            parent.location.reload();
+                        });
                     } else if (e=="-1"){
                         layer.msg("此场馆已经添加了，请不要重复添加。")
                     } else {

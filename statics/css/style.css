@@ -16,3 +16,7 @@
 .message {
     color: red;
 }
+
+.hide_element {
+    display:none;
+}

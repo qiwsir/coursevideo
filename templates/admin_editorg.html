@@ -20,40 +20,44 @@
       <div class="linespace">
         <label class="am-u-sm-3 am-form-label text-right" >场馆名称:</label>
         <div class="am-u-sm-9">
-            <input type="text" name="" id="orgname" value="{{orgname}}">
+            <input type="text" name="" id="editorgname" value="{{orginfo[5]}}">
         </div>
       </div>
       <br>
       <div class="linespace">
         <label class="am-u-sm-3 am-form-label text-right">联系人:</label>
         <div class="am-u-sm-9">
-            <input type="text" name="" id="orgperson" value="{{orginfo[1]}}">
+            <input type="text" name="" id="editorgperson" value="{{orginfo[1]}}">
         </div>
       </div>
       <br>
       <div class="linespace">
         <label class="am-u-sm-3 am-form-label text-right">手机号:</label>
         <div class="am-u-sm-9">
-            <input type="text" name="" id="orgphone" value="{{orginfo[2]}}">
+            <input type="text" name="" id="editorgphone" value="{{orginfo[2]}}">
         </div>
       </div>
       <br>
       <div class="linespace">
         <label class="am-u-sm-3 am-form-label text-right">微信号:</label>
         <div class="am-u-sm-9">
-            <input type="text" name="" id="orgwechat" value="{{orginfo[3]}}">
+            <input type="text" name="" id="editorgwechat" value="{{orginfo[3]}}">
         </div>
       </div>
       <br>
       <div class="linespace">
         <label class="am-u-sm-3 am-form-label text-right">详细地址:</label>
         <div class="am-u-sm-9">
-            <input type="text" name="" id="orgaddress" value="{{orginfo[1]}}">
+            <input type="text" name="" id="editorgaddress" value="{{orginfo[0]}}">
+        </div>
+        <div class="hide_element">
+            <input type="text" class="hide_element" id="editorgid" value="{{orginfo[4]}}">
         </div>
     </div>
       <br />
       <div style="text-align:right; margin-top:25px;">
-        <input class="am-btn am-btn-default am-btn-sm am-fr" type="button" name="" id="addorg" value="增加本场馆" >
+          <a class="am-btn am-btn-default am-btn-sm am-fr" type="button" name="" id="editorg">保存对本场馆的修改</a >
+          <a class="am-btn am-btn-default am-btn-sm am-fr" type="button" name="" id="noedit">取消</a >
       </div>
     </form>
   </div>
@@ -62,5 +66,75 @@
   <div class="center" id="message">
   </div>
 </div>
+
+
+<script src="{{static_url('js/jquery.min.js')}}"></script>
+<script src="{{static_url('js/amazeui.min.js')}}"></script>
+<script src="{{static_url('js/app.js')}}"></script>
+<script src="{{static_url('js/layer.js')}}"></script>
+<script>
+
+//保存修改场馆的信息
+$(document).ready(function(){
+    $("#editorg").click(function(){
+        var orgname = $("#editorgname").val();
+        var orgperson = $("#editorgperson").val();
+        var orgphone = $("#editorgphone").val();
+        var orgwechat = $("#editorgwechat").val();
+        var orgaddress = $("#editorgaddress").val();
+        var orgid = $("#editorgid").val();
+        
+
+        var isname = isChinese(orgname);
+        var isperson = isChinese(orgperson);
+        var isphone = isMobil(orgphone);
+        var iswechat = isChinese(orgwechat);
+        var isaddress = isChinese(orgaddress);
+
+        if (isname && isperson && isphone && iswechat && isaddress){
+            var post_data = {"orgname":orgname, "orgperson":orgperson, "orgphone":orgphone, "orgwechat":orgwechat, "orgaddress":orgaddress, "orgid":orgid}
+
+            $.ajax({
+                type: "post",
+                url: "/editorg",
+                data: post_data,
+                cache: false,
+                async: false,
+                success: function(e){
+                    if (e=="1"){
+                    layer.msg("恭喜！修改成功。",{
+                        time: 1000
+                        }, 
+                        function(){
+                        parent.location.reload();
+                        //var index = parent.layer.getFrameIndex(window.name)
+                        //parent.layer.close(index)
+                        });
+                    } else if (e=="-1"){
+                        layer.msg("此场馆已经存在，请不要重复添加。")
+                    } else {
+                        layer.msg("Sorry!没能添加，请重试。")
+                    }
+                },
+                error: function(e){
+                    layer.msg("操作失败，请检查网络。")
+                }
+            }
+            ) 
+        } else {
+            layer.msg("没有认真填写各项，再来一边。")
+        }
+    })
+})
+
+//取消修改
+$(document).ready(function(){
+        $("#noedit").click(function(){
+            var index = parent.layer.getFrameIndex(window.name);
+            parent.layer.close(index);
+            
+            });
+        })
+</script>
 
 {% end %}

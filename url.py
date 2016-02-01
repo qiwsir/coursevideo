@@ -10,11 +10,20 @@ from handlers.login import LoginHandler
 from handlers.admin_orgs import AdminOrgHandler
 from handlers.admin_orgs import AdminNewOrgHandler
 from handlers.admin_orgs import AdminEditOrgHandler
+from handlers.admin_orgs import AdminReadOrgHandler
+
+from handlers.admin_users import AdminUserHandler
+from handlers.admin_users import AdminNewUserHandler
+
 
 url=[
-    (r'/', IndexHandler),
-    (r'/login', LoginHandler),
-    (r"/org", AdminOrgHandler),
-    (r'/neworg', AdminNewOrgHandler),
-    (r'/editorg', AdminEditOrgHandler),
+    (r'/', IndexHandler),                    # the index page
+    (r'/login', LoginHandler),               # the administrator login into the web
+    (r"/org", AdminOrgHandler),              # the list of org
+    (r'/neworg', AdminNewOrgHandler),        # add a new org
+    (r'/editorg', AdminEditOrgHandler),      # edit an org
+    (r'/readorg', AdminReadOrgHandler),      # list an org
+
+    (r'/user', AdminUserHandler),            # the list of users
+    (r'/newuser', AdminNewUserHandler),        # add a new user
     ]

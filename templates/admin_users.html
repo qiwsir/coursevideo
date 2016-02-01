@@ -40,6 +40,7 @@
       <ul class="am-list admin-sidebar-list">
         <li><a href="/login"><span class="am-icon-home"></span> 首页</a></li>
         <li><a href="/org"><span class="am-icon-table"></span> 场馆管理</a></li>
+        <li><a href="/usr"><span class="am-icon-table"></span> 用户管理</a></li>
         <li><a href="admin_courses.html"><span class="am-icon-table"></span> 课程管理</a></li>
         <li><a href="#"><span class="am-icon-sign-out"></span> 注销</a></li>
       </ul>
@@ -65,14 +66,14 @@
   <div class="admin-content">
 
     <div class="am-cf am-padding">
-      <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">场馆列表</strong></div>
+      <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">用户列表</strong></div>
     </div>
 
     <div class="am-g">
       <div class="am-u-sm-12 am-u-md-6">
         <div class="am-btn-toolbar">
           <div class="am-btn-group am-btn-group-xs">
-            <a id="neworg" type="button" class="am-btn am-btn-default"><span class="am-icon-plus"></span> 新增</a>
+            <a id="newuser" type="button" class="am-btn am-btn-default"><span class="am-icon-plus"></span> 新增用户</a>
           </div>
         </div>
       </div>
@@ -92,19 +93,17 @@
           <table class="am-table am-table-striped am-table-hover table-main">
             <thead>
               <tr>
-                  <th class="table-check"><input type="checkbox" /></th><th class="table-id">ID</th><th class="table-title">场馆名称</th><th class="table-date am-hide-sm-only">联系人</th><th class="table-date am-hide-sm-only">手机号</th><th class="table-title">微信</th><th class="table-set">操作</th>
+                  <th class="table-check"><input type="checkbox" /></th><th class="table-id">ID</th><th class="table-title">手机号</th><th class="table-date am-hide-sm-only">姓名</th><th class="table-date am-hide-sm-only">所在场馆</th><th class="table-set">操作</th>
               </tr>
           </thead>
           <tbody>
-            {% for org in orgs %}
+            {% for user in users %}
             <tr>
               <td><input type="checkbox" /></td>
-              <td>{{orgs.index(org)+1}}</td>
-              <td id="orgname">{{ org[0] }}</td>
-              <td class="am-hide-sm-only">{{org[1]}}</td>
-              <td class="am-hide-sm-only">{{org[2]}}</td>
-              <td class="am-hide-sm-only">{{org[3]}}</td>
-              <td class="hide_element">{{org[4]}}</td>
+              <td>{{users.index(user)+1}}</td>
+              <td >{{ user[0] }}</td>
+              <td class="am-hide-sm-only">{{user[1]}}</td>
+              <td class="am-hide-sm-only">{{orgs[users.index(user)]}}</td>
               <td>
                 <div class="am-btn-toolbar">
                   <div class="am-btn-group am-btn-group-xs">
@@ -149,14 +148,14 @@
 <script src="{{static_url('js/app.js')}}"></script>
 <script src="{{static_url('js/layer.js')}}"></script>
 <script>
-    $("#neworg").on("click", function(){
+    $("#newuser").on("click", function(){
             layer.open({
                 type: 2,
-                title: '添加新的场馆',
+                title: '添加新用户',
                 shadeClose: true,
                 shade: 0.8,
                 area: ['800px', '600px'],
-                content: '/neworg'
+                content: '/newuser'
                 });
             });
 

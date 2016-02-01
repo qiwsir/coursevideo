@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+{% block header %}
+
+{% end %}
+
+{% block body %}
+
+<div class="am-g">
+  <div class="am-u-lg-6 am-u-md-8 am-u-sm-centered">
+    <!--h3>增加新的场馆</h3>
+    <hr-->
+    <div class="am-btn-group">
+      <!--a href="#" class="am-btn am-btn-secondary am-btn-sm"><i class="am-icon-github am-icon-sm"></i> Github</a>
+      <a href="#" class="am-btn am-btn-success am-btn-sm"><i class="am-icon-google-plus-square am-icon-sm"></i> Google+</a>
+      <a href="#" class="am-btn am-btn-primary am-btn-sm"><i class="am-icon-stack-overflow am-icon-sm"></i> stackOverflow</a-->
+    </div>
+
+    <form class="am-form">
+      <div class="linespace">
+        <label class="am-u-sm-3 am-form-label text-right" >场馆名称:</label>
+        <div class="am-u-sm-9">
+            {{orginfo[5]}}
+        </div>
+      </div>
+      <br>
+      <div class="linespace">
+        <label class="am-u-sm-3 am-form-label text-right">联系人:</label>
+        <div class="am-u-sm-9">
+            {{orginfo[1]}}
+        </div>
+      </div>
+      <br>
+      <div class="linespace">
+        <label class="am-u-sm-3 am-form-label text-right">手机号:</label>
+        <div class="am-u-sm-9">
+            {{orginfo[2]}}
+        </div>
+      </div>
+      <br>
+      <div class="linespace">
+        <label class="am-u-sm-3 am-form-label text-right">微信号:</label>
+        <div class="am-u-sm-9">
+            {{orginfo[3]}}
+        </div>
+      </div>
+      <br>
+      <div class="linespace">
+        <label class="am-u-sm-3 am-form-label text-right">详细地址:</label>
+        <div class="am-u-sm-9">
+            {{orginfo[0]}}
+        </div>
+        <div class="hide_element">
+            <input type="text" class="hide_element" id="editorgid" value="{{orginfo[4]}}">
+        </div>
+    </div>
+      <br />
+      <div style="text-align:right; margin-top:25px;">
+          <a class="am-btn am-btn-default am-btn-sm am-fr" type="button" name="" id="back">退回</a >
+      </div>
+    </form>
+  </div>
+  <br/>
+  <br/>
+  <div class="center" id="message">
+  </div>
+</div>
+
+
+<script src="{{static_url('js/jquery.min.js')}}"></script>
+<script src="{{static_url('js/amazeui.min.js')}}"></script>
+<script src="{{static_url('js/app.js')}}"></script>
+<script src="{{static_url('js/layer.js')}}"></script>
+<script>
+
+//关闭
+$(document).ready(function(){
+        $("#back").click(function(){
+            var index = parent.layer.getFrameIndex(window.name);
+            parent.layer.close(index);
+            
+            });
+        })
+</script>
+
+{% end %}
