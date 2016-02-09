@@ -112,25 +112,54 @@ $(document).ready(function(){
 })
 
 
+//增加新的用户
 $(document).ready(function(){
-    $("#submitcategory").click(function(){
-        var category_name = $("#categoryname").val();
-        if (category_name){
-            var vategoryname = {"category_name":category_name}
+    $("#adduser").click(function(){
+        var user_mobilephone = $("#mobilephone").val();
+        var user_username = $("#username").val();
+        var user_password = $("#password").val();
+        var user_org = $("#orgname").val();
+        alert(user_org);
+        var user_starttime = $("#starttime").val();
+        var user_endtime = $("#endtime").val();
+
+        var isname = isChinese(orgname);
+        var isperson = isChinese(orgperson);
+        var isphone = isMobil(orgphone);
+        var iswechat = isChinese(orgwechat);
+        var isaddress = isChinese(orgaddress);
+
+        if (isname && isperson && isphone && iswechat && isaddress){
+            var post_data = {"orgname":orgname, "orgperson":orgperson, "orgphone":orgphone, "orgwechat":orgwechat, "orgaddress":orgaddress}
+
             $.ajax({
                 type: "post",
-                url: "/audio",
-                data: vategoryname,
+                url: "/neworg",
+                data: post_data,
+                cache: false,
+                async: false,
                 success: function(e){
                     if (e=="1"){
-                        alert("ok, the category is right.")
+                        layer.msg("恭喜！添加成功。。",{
+                            time: 1000
+                        },function(){
+                            parent.location.reload();
+                        });
+                    } else if (e=="-1"){
+                        layer.msg("此场馆已经添加了，请不要重复添加。")
                     } else {
-                        alert("you are wrong.")
+                        layer.msg("Sorry!没能添加，请重试。")
                     }
+                },
+                error: function(e){
+                    layer.msg("操作失败，请检查网络。")
                 }
-            })
+            }
+            ) 
         } else {
-            alert("You should input category name.")
+            layer.msg("没有认真填写各项，再来一边。")
         }
     })
 })
+
+

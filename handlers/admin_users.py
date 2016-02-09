@@ -40,7 +40,9 @@ class AdminNewUserHandler(tornado.web.RequestHandler):
     add new user
     """
     def get(self):
-        self.render("admin_newuser.html")
+        orgs = selectData("orgs", "name")
+        print orgs
+        self.render("admin_newuser.html", orgs=orgs)
     
     def post(self):
         """

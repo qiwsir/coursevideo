@@ -34,21 +34,25 @@
       <div class="linespace">
         <label class="am-u-sm-3 am-form-label text-right">所在场馆:</label>
         <div class="am-u-sm-9">
-          <input type="text" name="" id="userorg" value="">
+          <select id="orgname">
+              {% for org in orgs%}
+              <option value="{{org[0]}}">{{org[0]}}</option>
+              {% end %}
+          </select>
         </div>
       </div>
       <br>
       <div class="linespace">
         <label class="am-u-sm-3 am-form-label text-right">开始时间:</label>
         <div class="am-u-sm-9">
-          <input type="text" name="" id="starttime" value="">
+          <input id="starttime" value="" type="text" class="am-form-field" placeholder="选择日期" data-am-datepicker readonly required>
         </div>
       </div>
       <br>
       <div class="linespace">
         <label class="am-u-sm-3 am-form-label text-right">结束时间:</label>
         <div class="am-u-sm-9">
-          <input type="text" name="" id="endtime" value="">
+          <input id="endtime" value="" type="text" class="am-form-field" placeholder="选择日期" data-am-datepicker readonly required>
         </div>
       </div>
       <br />
