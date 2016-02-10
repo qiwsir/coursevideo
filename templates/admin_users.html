@@ -93,7 +93,7 @@
           <table class="am-table am-table-striped am-table-hover table-main">
             <thead>
               <tr>
-                  <th class="table-check"><input type="checkbox" /></th><th class="table-id">ID</th><th class="table-title">手机号</th><th class="table-date am-hide-sm-only">姓名</th><th class="table-date am-hide-sm-only">所在场馆</th><th class="table-set">操作</th>
+                  <th class="table-check"><input type="checkbox" /></th><th class="table-id">ID</th><th class="table-title">手机号</th><th class="table-date am-hide-sm-only">姓名</th><th class="table-date am-hide-sm-only">所在场馆</th><th class="table-title">状态</th><th class="table-set">操作</th>
               </tr>
           </thead>
           <tbody>
@@ -104,13 +104,22 @@
               <td >{{user[0]}}</td>
               <td>{{user[1]}}</td>
               <td>{{orgs[users.index(user)]}}</td>
+              {% if user[3]==1 %}
+              <td>已开通</td>
+              {% else %}
+              <td>未开通</td>
+              {% end %}
+              <td class="hide_element">{{user[4]}}</td>
               <td>
                 <div class="am-btn-toolbar">
                   <div class="am-btn-group am-btn-group-xs">
                       {% if user[3]==1 %}
-                      <a onclick="editOrg(this)" class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o">ok</span> </a>
-                    <a onclick="delOrg(this)" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</a>
-                    <a class="am-btn am-btn-default am-btn-xs am-hide-sm-only" onclick="readOrg(this)">查看<span class="am-icon-copy"></span> </a>
+                      <a onclick="editOrg(this)" class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o">关闭</span> </a>
+                      {% else %}
+                      <a onclick="editOrg(this)" class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o">开通</span> </a>
+                      {% end %}
+                    <a onclick="delUser(this)" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</a>
+                    <a class="am-btn am-btn-default am-btn-xs am-hide-sm-only" onclick="dispUser(this)">查看<span class="am-icon-copy"></span> </a>
                   </div>
                 </div>
               </td>
@@ -159,25 +168,26 @@
                 });
             });
 
-//删除场馆
-function delOrg(thisObj){
+//删除用户
+function delUser(thisObj){
     var $td = $(thisObj).parents('tr').children("td");
-    var orgname = $td.eq(2).text();
-    //layer.msg("删除了“"+orgname+"”。");
-    layer.confirm("你正在准备删除："+orgname, {
+    var userid = $td.eq(6).text();
+    var username = $td.eq(3).text();
+
+    layer.confirm("你正在准备删除："+username, {
             btn: ["删除", "取消删除"]
             }, function(){
-            delName(orgname);
+            delName(userid);
             }, function(){
             layer.msg("已经取消删除了")
             });
 }
 
 function delName(name){
-    delorg = {"orgname": name}
+    delorg = {"id": name}
     $.ajax({
         type: "post",
-        url: "/org",
+        url: "/user",
         data: delorg,
         success: function(e){
             if (e=="1"){
@@ -207,16 +217,16 @@ function editOrg(thisObj){
     
 }
 //查看场馆详细信息
-function readOrg(thisObj){
+function dispUser(thisObj){
     var $td = $(thisObj).parents('tr').children("td");
-    var orgid = $td.eq(6).text();
+    var id = $td.eq(6).text();
     layer.open({
             type: 2,
             title: '查看场馆信息',
             shadeClose: true,
             shade: 0.8,
             area: ['800px', '600px'],
-            content: "/readorg?orgid="+orgid
+            content: "/dispuser?id="+id
             });
 }
 </script>

@@ -14,7 +14,7 @@ from handlers.admin_orgs import AdminReadOrgHandler
 
 from handlers.admin_users import AdminUserHandler
 from handlers.admin_users import AdminNewUserHandler
-
+from handlers.admin_users import AdminDispUserHandler
 
 url=[
     (r'/', IndexHandler),                    # the index page
@@ -26,4 +26,5 @@ url=[
 
     (r'/user', AdminUserHandler),            # the list of users
     (r'/newuser', AdminNewUserHandler),        # add a new user
+    (r'/dispuser', AdminDispUserHandler),    # display the all information of the user.
     ]

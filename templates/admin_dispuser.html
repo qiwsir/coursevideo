@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+
+{% block header %}
+
+{% end %}
+
+{% block body %}
+
+<div class="am-g">
+  <div class="am-u-lg-6 am-u-md-8 am-u-sm-centered">
+    <!--h3>增加新的场馆</h3>
+    <hr-->
+    <div class="am-btn-group">
+      <!--a href="#" class="am-btn am-btn-secondary am-btn-sm"><i class="am-icon-github am-icon-sm"></i> Github</a>
+      <a href="#" class="am-btn am-btn-success am-btn-sm"><i class="am-icon-google-plus-square am-icon-sm"></i> Google+</a>
+      <a href="#" class="am-btn am-btn-primary am-btn-sm"><i class="am-icon-stack-overflow am-icon-sm"></i> stackOverflow</a-->
+    </div>
+
+    <form class="am-form">
+      <div class="linespace">
+        <label class="am-u-sm-3 am-form-label text-right" >用户手机号:</label>
+        <div class="am-u-sm-9">
+            {{userinfo[0]}}
+        </div>
+      </div>
+      <br>
+      <div class="linespace">
+        <label class="am-u-sm-3 am-form-label text-right">用户姓名:</label>
+        <div class="am-u-sm-9">
+            {{userinfo[1]}}
+        </div>
+      </div>
+      <br>
+      <div class="linespace">
+        <label class="am-u-sm-3 am-form-label text-right">所属场馆:</label>
+        <div class="am-u-sm-9">
+            {{orgname}}
+        </div>
+      </div>
+      <br>
+      <div class="linespace">
+        <label class="am-u-sm-3 am-form-label text-right">当前状态:</label>
+        <div class="am-u-sm-9">
+            {% if userinfo[3]==1 %}已开通{% else %}未开通{% end %}
+        </div>
+      </div>
+      <br>
+      <div class="linespace">
+        <label class="am-u-sm-3 am-form-label text-right">开始时间:</label>
+        <div class="am-u-sm-9">
+            {{userinfo[4]}}
+        </div>
+      </div>
+      <div class="linespace">
+        <label class="am-u-sm-3 am-form-label text-right">结束时间:</label>
+        <div class="am-u-sm-9">
+            {{userinfo[5]}}
+        </div>
+        <div class="hide_element">
+            <input type="text" class="hide_element" id="editorgid" value="{{userid}}">
+        </div>
+    </div>
+      <br />
+      <div style="text-align:right; margin-top:25px;">
+          <a class="am-btn am-btn-default am-btn-sm am-fr" type="button" name="" id="back">退回</a >
+      </div>
+    </form>
+  </div>
+  <br/>
+  <br/>
+  <div class="center" id="message">
+  </div>
+</div>
+
+
+<script src="{{static_url('js/jquery.min.js')}}"></script>
+<script src="{{static_url('js/amazeui.min.js')}}"></script>
+<script src="{{static_url('js/app.js')}}"></script>
+<script src="{{static_url('js/layer.js')}}"></script>
+<script>
+
+//关闭
+$(document).ready(function(){
+        $("#back").click(function(){
+            var index = parent.layer.getFrameIndex(window.name);
+            parent.layer.close(index);
+            
+            });
+        })
+</script>
+
+{% end %}

@@ -22,18 +22,15 @@ class AdminUserHandler(tornado.web.RequestHandler):
         orgnames = [selectDataWhere("orgs", "name", id=i)[0][0] for i in orgids]
         orgnames.reverse()
         users_info_reverse = users_info[::-1] 
-        print users_info_reverse
-        print orgnames
-        #self.render("admin_users.html", users=users_info_reverse, orgs=orgnames.reverse())
         self.render("admin_users.html", users=users_info_reverse, orgs=orgnames)
 
     def post(self):
         """
         delete the orgnazation.
         """
-        org_name = self.get_argument("orgname")
+        user_id = self.get_argument("id")
         
-        if deleteLine("orgs", name=org_name):
+        if deleteLine("users", id=user_id):
             self.write("1")
         else:
             self.write("0")
@@ -99,12 +96,14 @@ class AdminEditOrgHandler(tornado.web.RequestHandler):
             self.write("0")
 
 
-class AdminReadOrgHandler(tornado.web.RequestHandler):
+class AdminDispUserHandler(tornado.web.RequestHandler):
     """
-    list the information of the orgnazations
+    list the information of the user. 
     """
     def get(self):
-        org_id = self.get_argument("orgid")
-        org_info = selectDataWhere("orgs", "address", "person", "phone", "wechat", "id", "name", id=org_id)
-
-        self.render("admin_readorg.html", orginfo=org_info[0])
+        user_id = self.get_argument("id")
+        user_info = selectDataWhere("users", "mobilephone", "name", "orgnameID", "status", "starttime", "endtime", id=user_id)
+        org_id = user_info[0][2]
+        org_name = selectDataWhere("orgs", "name", id=org_id)
+        org_name = org_name[0][0]
+        self.render("admin_dispuser.html", userinfo=user_info[0], orgname=org_name, userid=user_id)
