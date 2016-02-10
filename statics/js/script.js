@@ -119,22 +119,19 @@ $(document).ready(function(){
         var user_username = $("#username").val();
         var user_password = $("#password").val();
         var user_org = $("#orgname").val();
-        alert(user_org);
         var user_starttime = $("#starttime").val();
         var user_endtime = $("#endtime").val();
 
-        var isname = isChinese(orgname);
-        var isperson = isChinese(orgperson);
-        var isphone = isMobil(orgphone);
-        var iswechat = isChinese(orgwechat);
-        var isaddress = isChinese(orgaddress);
+        var isphone = isMobil(user_mobilephone);
+        var isname = isChinese(user_username);
+        var ispassword = isChinese(user_password);
 
-        if (isname && isperson && isphone && iswechat && isaddress){
-            var post_data = {"orgname":orgname, "orgperson":orgperson, "orgphone":orgphone, "orgwechat":orgwechat, "orgaddress":orgaddress}
+        if (isname && isphone && ispassword){
+            var post_data = {"mobilephone":user_mobilephone, "username":user_username, "password":user_password, "org":user_org, "starttime":user_starttime, "endtime":user_endtime}
 
             $.ajax({
                 type: "post",
-                url: "/neworg",
+                url: "/newuser",
                 data: post_data,
                 cache: false,
                 async: false,

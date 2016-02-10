@@ -101,21 +101,21 @@
             <tr>
               <td><input type="checkbox" /></td>
               <td>{{users.index(user)+1}}</td>
-              <td >{{ user[0] }}</td>
-              <td class="am-hide-sm-only">{{user[1]}}</td>
-              <td class="am-hide-sm-only">{{orgs[users.index(user)]}}</td>
+              <td >{{user[0]}}</td>
+              <td>{{user[1]}}</td>
+              <td>{{orgs[users.index(user)]}}</td>
               <td>
                 <div class="am-btn-toolbar">
                   <div class="am-btn-group am-btn-group-xs">
-                    <a onclick="editOrg(this)" class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o"></span> 编辑</a>
+                      {% if user[3]==1 %}
+                      <a onclick="editOrg(this)" class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o">ok</span> </a>
                     <a onclick="delOrg(this)" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</a>
                     <a class="am-btn am-btn-default am-btn-xs am-hide-sm-only" onclick="readOrg(this)">查看<span class="am-icon-copy"></span> </a>
                   </div>
                 </div>
               </td>
             </tr>
-            {% end %}
-            
+            {% end %} 
           </tbody>
         </table>
           <div class="am-cf">

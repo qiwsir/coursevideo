@@ -19,10 +19,13 @@ class AdminUserHandler(tornado.web.RequestHandler):
         """
         users_info = selectData("users", "mobilephone", "name", "orgnameID", "status", "id")
         orgids = [i[2] for i in users_info]
-        orgnames = [selectDataWhere("orgs", "name", id=i) for i in orgids]
-        
+        orgnames = [selectDataWhere("orgs", "name", id=i)[0][0] for i in orgids]
+        orgnames.reverse()
         users_info_reverse = users_info[::-1] 
-        self.render("admin_users.html", users=users_info_reverse, orgs=orgnames.reverse())
+        print users_info_reverse
+        print orgnames
+        #self.render("admin_users.html", users=users_info_reverse, orgs=orgnames.reverse())
+        self.render("admin_users.html", users=users_info_reverse, orgs=orgnames)
 
     def post(self):
         """
@@ -41,25 +44,27 @@ class AdminNewUserHandler(tornado.web.RequestHandler):
     """
     def get(self):
         orgs = selectData("orgs", "name")
-        print orgs
         self.render("admin_newuser.html", orgs=orgs)
     
     def post(self):
         """
         get the data from before web page.
         """
-        org_name = self.get_argument("orgname")
-        org_person = self.get_argument("orgperson")
-        org_phone = self.get_argument("orgphone")
-        org_wechat = self.get_argument("orgwechat")
-        org_address = self.get_argument("orgaddress")
+        user_mobilephone = self.get_argument("mobilephone")
+        user_name = self.get_argument("username")
+        user_password = self.get_argument("password")
+        user_org = self.get_argument("org")
+        user_starttime = self.get_argument("starttime")
+        user_endtime = self.get_argument("endtime")
+        print user_mobilephone
         
-        result = selectDataWhere("orgs", "id", name=org_name)
+        result = selectDataWhere("users", "id", mobilephone=user_mobilephone)
         if result:
             self.write("-1")
         else:
+            orgname_id = selectDataWhere("orgs", "id", name=user_org)[0][0]
             try:
-                insertData("orgs", name=org_name, person=org_person, phone=org_phone, wechat=org_wechat, address=org_address)
+                insertData("users", username=user_mobilephone, mobilephone=user_mobilephone, name=user_name, orgnameID=orgname_id, password=user_password, starttime=user_starttime, endtime=user_endtime, status=1)
                 self.write("1")
             except:
                 self.write("0")
