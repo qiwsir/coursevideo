@@ -137,7 +137,7 @@ $(document).ready(function(){
                 async: false,
                 success: function(e){
                     if (e=="1"){
-                        layer.msg("恭喜！添加成功。。",{
+                        layer.msg("恭喜！添加成功。",{
                             time: 1000
                         },function(){
                             parent.location.reload();

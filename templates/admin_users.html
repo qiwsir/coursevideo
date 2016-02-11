@@ -40,7 +40,7 @@
       <ul class="am-list admin-sidebar-list">
         <li><a href="/login"><span class="am-icon-home"></span> 首页</a></li>
         <li><a href="/org"><span class="am-icon-table"></span> 场馆管理</a></li>
-        <li><a href="/usr"><span class="am-icon-table"></span> 用户管理</a></li>
+        <li><a href="/user"><span class="am-icon-table"></span> 用户管理</a></li>
         <li><a href="admin_courses.html"><span class="am-icon-table"></span> 课程管理</a></li>
         <li><a href="#"><span class="am-icon-sign-out"></span> 注销</a></li>
       </ul>
@@ -114,9 +114,9 @@
                 <div class="am-btn-toolbar">
                   <div class="am-btn-group am-btn-group-xs">
                       {% if user[3]==1 %}
-                      <a onclick="editOrg(this)" class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o">关闭</span> </a>
+                      <a onclick="changeStatus(this, 0)" class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o">关闭</span> </a>
                       {% else %}
-                      <a onclick="editOrg(this)" class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o">开通</span> </a>
+                      <a onclick="changeStatus(this, 1)" class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o">开通</span> </a>
                       {% end %}
                     <a onclick="delUser(this)" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</a>
                     <a class="am-btn am-btn-default am-btn-xs am-hide-sm-only" onclick="dispUser(this)">查看<span class="am-icon-copy"></span> </a>
@@ -200,21 +200,27 @@ function delName(name){
     });
 }
 
-//编辑场馆信息
-function editOrg(thisObj){
+//关闭/开通用户
+function changeStatus(thisObj, status){
     var $td = $(thisObj).parents('tr').children("td");
-    var orgid = $td.eq(6).text();
-    //popWin.showWin("800", '600', "编辑场馆", "http://www.baidu.com");
-    //window.open('/editorg?orgname='+orgname);
-            layer.open({
-                type: 2,
-                title: '编辑场馆信息',
-                shadeClose: true,
-                shade: 0.8,
-                area: ['800px', '600px'],
-                content: '/editorg?orgid='+orgid
+    var id = $td.eq(6).text();
+    var data = {"id": id, "status": status}
+    $.ajax({
+            type: "post",
+            url: "/dispuser",
+            data:data,
+            success: function(e){
+            if (e=="1"){
+            layer.msg("状态修改成功.", {
+                time: 1000
+                },function(){
+                    location.reload();
                 });
-    
+            } else {
+                layer.msg("修改状态操作失败")
+                }
+            }
+        }); 
 }
 //查看场馆详细信息
 function dispUser(thisObj){

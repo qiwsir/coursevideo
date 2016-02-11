@@ -16,6 +16,8 @@ from handlers.admin_users import AdminUserHandler
 from handlers.admin_users import AdminNewUserHandler
 from handlers.admin_users import AdminDispUserHandler
 
+from handlers.admin_courses import AdminCourseHandler
+
 url=[
     (r'/', IndexHandler),                    # the index page
     (r'/login', LoginHandler),               # the administrator login into the web
@@ -27,4 +29,6 @@ url=[
     (r'/user', AdminUserHandler),            # the list of users
     (r'/newuser', AdminNewUserHandler),        # add a new user
     (r'/dispuser', AdminDispUserHandler),    # display the all information of the user.
+
+    (r'/course', AdminCourseHandler),        # the list of courses.
     ]

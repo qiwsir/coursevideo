@@ -26,7 +26,7 @@ class AdminUserHandler(tornado.web.RequestHandler):
 
     def post(self):
         """
-        delete the orgnazation.
+        delete the user.
         """
         user_id = self.get_argument("id")
         
@@ -53,7 +53,6 @@ class AdminNewUserHandler(tornado.web.RequestHandler):
         user_org = self.get_argument("org")
         user_starttime = self.get_argument("starttime")
         user_endtime = self.get_argument("endtime")
-        print user_mobilephone
         
         result = selectDataWhere("users", "id", mobilephone=user_mobilephone)
         if result:
@@ -66,35 +65,6 @@ class AdminNewUserHandler(tornado.web.RequestHandler):
             except:
                 self.write("0")
    
-class AdminEditOrgHandler(tornado.web.RequestHandler):
-    """
-    edit the information of the orgnazations
-    """
-    def get(self):
-        org_id = self.get_argument("orgid")
-        org_info = selectDataWhere("orgs", "address", "person", "phone", "wechat", "id", "name", id=org_id)
-
-        self.render("admin_editorg.html", orginfo=org_info[0])
-
-    def post(self):
-        """
-        get the information from before web to rewrite the org.
-        """ 
-        org_name = self.get_argument("orgname")
-        org_person = self.get_argument("orgperson")
-        org_phone = self.get_argument("orgphone")
-        org_wechat = self.get_argument("orgwechat")
-        org_address = self.get_argument("orgaddress")
-        org_id = self.get_argument("orgid")
-        
-        updatethings = {"name":org_name, "person":org_person, "phone":org_phone, "wechat":org_wechat, "address":org_address}
-        condition = {"id":org_id}
-        try:
-            updateLineWhere("orgs", updatethings, condition)
-            self.write("1")
-        except:
-            self.write("0")
-
 
 class AdminDispUserHandler(tornado.web.RequestHandler):
     """
@@ -107,3 +77,14 @@ class AdminDispUserHandler(tornado.web.RequestHandler):
         org_name = selectDataWhere("orgs", "name", id=org_id)
         org_name = org_name[0][0]
         self.render("admin_dispuser.html", userinfo=user_info[0], orgname=org_name, userid=user_id)
+
+    def post(self):
+        user_id = int(self.get_argument("id"))
+        user_status = int(self.get_argument("status"))
+        updatething = {"status": user_status}
+        condition = {"id": user_id}
+        try:
+            updateLineWhere("users", updatething, condition)
+            self.write("1")
+        except:
+            self.write('0')
