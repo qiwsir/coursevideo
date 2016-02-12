@@ -73,7 +73,7 @@
       <div class="am-u-sm-12 am-u-md-6">
         <div class="am-btn-toolbar">
           <div class="am-btn-group am-btn-group-xs">
-            <a id="newuser" type="button" class="am-btn am-btn-default"><span class="am-icon-plus"></span> 新增课程</a>
+            <a id="newcourse" type="button" class="am-btn am-btn-default"><span class="am-icon-plus"></span> 新增课程</a>
           </div>
         </div>
       </div>
@@ -97,26 +97,26 @@
               </tr>
           </thead>
           <tbody>
-            {% for user in users %}
+            {% for course in courses %}
             <tr>
               <td><input type="checkbox" /></td>
-              <td>{{users.index(user)+1}}</td>
-              <td >{{user[0]}}</td>
-              <td>{{user[1]}}</td>
-              <td>{{orgs[users.index(user)]}}</td>
-              {% if user[3]==1 %}
-              <td>已开通</td>
+              <td>{{courses.index(course)+1}}</td>
+              <td >{{course[0]}}</td>
+              <td>{{course[1]}}</td>
+              <td>{{course[2]}}</td>
+              {% if course[3]==1 %}
+              <td>已发布</td>
               {% else %}
-              <td>未开通</td>
+              <td>未发布</td>
               {% end %}
-              <td class="hide_element">{{user[4]}}</td>
+              <td class="hide_element">{{course[4]}}</td>
               <td>
                 <div class="am-btn-toolbar">
                   <div class="am-btn-group am-btn-group-xs">
-                      {% if user[3]==1 %}
+                      {% if course[3]==1 %}
                       <a onclick="changeStatus(this, 0)" class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o">关闭</span> </a>
                       {% else %}
-                      <a onclick="changeStatus(this, 1)" class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o">开通</span> </a>
+                      <a onclick="changeStatus(this, 1)" class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o">发布</span> </a>
                       {% end %}
                     <a onclick="delUser(this)" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</a>
                     <a class="am-btn am-btn-default am-btn-xs am-hide-sm-only" onclick="dispUser(this)">查看<span class="am-icon-copy"></span> </a>
@@ -157,37 +157,37 @@
 <script src="{{static_url('js/app.js')}}"></script>
 <script src="{{static_url('js/layer.js')}}"></script>
 <script>
-    $("#newuser").on("click", function(){
+    $("#newcourse").on("click", function(){
             layer.open({
                 type: 2,
-                title: '添加新用户',
+                title: '添加新课程',
                 shadeClose: true,
                 shade: 0.8,
                 area: ['800px', '600px'],
-                content: '/newuser'
+                content: '/newcourse'
                 });
             });
 
-//删除用户
+//删除课程
 function delUser(thisObj){
     var $td = $(thisObj).parents('tr').children("td");
-    var userid = $td.eq(6).text();
-    var username = $td.eq(3).text();
+    var id = $td.eq(6).text();
+    var name = $td.eq(2).text();
 
-    layer.confirm("你正在准备删除："+username, {
+    layer.confirm("你正在准备删除："+name, {
             btn: ["删除", "取消删除"]
             }, function(){
-            delName(userid);
+            delName(id);
             }, function(){
             layer.msg("已经取消删除了")
             });
 }
 
-function delName(name){
-    delorg = {"id": name}
+function delName(id){
+    delorg = {"id": id}
     $.ajax({
         type: "post",
-        url: "/user",
+        url: "/course",
         data: delorg,
         success: function(e){
             if (e=="1"){
@@ -200,14 +200,14 @@ function delName(name){
     });
 }
 
-//关闭/开通用户
+//关闭/发布课程
 function changeStatus(thisObj, status){
     var $td = $(thisObj).parents('tr').children("td");
     var id = $td.eq(6).text();
     var data = {"id": id, "status": status}
     $.ajax({
             type: "post",
-            url: "/dispuser",
+            url: "/dispcourse",
             data:data,
             success: function(e){
             if (e=="1"){
@@ -222,7 +222,7 @@ function changeStatus(thisObj, status){
             }
         }); 
 }
-//查看场馆详细信息
+//查看课程详细信息
 function dispUser(thisObj){
     var $td = $(thisObj).parents('tr').children("td");
     var id = $td.eq(6).text();
@@ -232,7 +232,7 @@ function dispUser(thisObj){
             shadeClose: true,
             shade: 0.8,
             area: ['800px', '600px'],
-            content: "/dispuser?id="+id
+            content: "/dispcourse?id="+id
             });
 }
 </script>

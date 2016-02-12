@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block header %}
+
+{% end %}
+
+{% block body %}
+
+<div class="am-g">
+  <div class="am-u-lg-6 am-u-md-8 am-u-sm-centered">
+
+    <form class="am-form">
+      <div class="linespace">
+        <label class="am-u-sm-3 am-form-label text-right" >课程名称:</label>
+        <div class="am-u-sm-9">
+            <input type="text" name="" id="coursename" value="">
+        </div>
+      </div>
+      <br>
+      <div class="linespace">
+        <label class="am-u-sm-3 am-form-label text-right">执教教师:</label>
+        <div class="am-u-sm-9">
+          <input type="text" name="" id="teachername" value="">
+        </div>
+      </div>
+      <br>
+      <div class="linespace">
+        <label class="am-u-sm-3 am-form-label text-right">教师简介:</label>
+        <div class="am-u-sm-9">
+            <textarea id="about"></textarea>
+        </div>
+      </div>
+      <br>
+      <br>
+      <div style="text-align:right; margin-top:25px;">
+          <a class="am-btn am-btn-default am-btn-sm am-fr" id="addcourse">增加本课程</a>
+      </div>
+    </form>
+  </div>
+  <br/>
+  <br/>
+</div>
+
+{% end %}

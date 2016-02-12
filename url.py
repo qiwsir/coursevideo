@@ -17,6 +17,8 @@ from handlers.admin_users import AdminNewUserHandler
 from handlers.admin_users import AdminDispUserHandler
 
 from handlers.admin_courses import AdminCourseHandler
+from handlers.admin_courses import AdminNewCourseHandler
+from handlers.admin_courses import AdminDispCourseHandler
 
 url=[
     (r'/', IndexHandler),                    # the index page
@@ -31,4 +33,7 @@ url=[
     (r'/dispuser', AdminDispUserHandler),    # display the all information of the user.
 
     (r'/course', AdminCourseHandler),        # the list of courses.
+    (r'/newcourse', AdminNewCourseHandler),  # add a new course.
+    (r'/dispcourse', AdminDispCourseHandler), #display the all information of the course
+
     ]
