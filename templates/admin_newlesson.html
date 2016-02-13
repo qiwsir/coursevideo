@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block header %}
+
+{% end %}
+
+{% block body %}
+
+<div class="am-g">
+  <div class="am-u-lg-6 am-u-md-8 am-u-sm-centered">
+
+    <form class="am-form">
+      <div class="linespace">
+        <label class="am-u-sm-3 am-form-label text-right" >视频名称:</label>
+        <div class="am-u-sm-9">
+            <input type="text" name="" id="videoname" value="">
+        </div>
+      </div>
+      <br>
+      <div class="linespace">
+        <label class="am-u-sm-3 am-form-label text-right">视频简介:</label>
+        <div class="am-u-sm-9">
+            <textarea id="aboutvideo"></textarea>
+        </div>
+      </div>
+      <br>
+      <br>
+      <br>
+      <div class="linespace">
+        <label class="am-u-sm-3 am-form-label text-right">所属课程:</label>
+        <div class="am-u-sm-9">
+          <select id="coursename">
+              {% for course in courses %}
+              <option value="{{course[1]}}">{{course[0]}}</option>
+              {% end %}
+          </select>
+        </div>
+      </div>
+      <br>
+      <div class="linespace">
+        <label class="am-u-sm-3 am-form-label text-right">上传视频:</label>
+        <div class="am-u-sm-9">
+            <input type="file" id="uploadvideo" name="上传视频文件" size=100>
+        </div>
+      </div>
+      <br>
+      <div style="text-align:right; margin-top:25px;">
+          <a class="am-btn am-btn-default am-btn-sm am-fr" id="addvideo">增加本视频</a>
+      </div>
+    </form>
+  </div>
+  <br/>
+  <br/>
+</div>
+
+{% end %}

@@ -202,3 +202,50 @@ $(document).ready(function(){
         }
     })
 })
+
+//增加新的视频
+$(document).ready(function(){
+    $("#addvideo").click(function(){
+        var lessonname = $("#videoname").val();
+        var aboutlesson = $("#aboutvideo").val();
+        var lessoncourse = $("#coursename").val();
+        var videofile = $("#uploadvideo").val();
+
+        alert(videofile);
+
+
+        var iscourse = isChinese(coursename);
+        var isteacher = isChinese(teachername);
+
+        if (iscourse && isteacher){
+            var post_data = {"coursename":coursename, "teachername":teachername, "aboutteacher":aboutteacher}
+
+            $.ajax({
+                type: "post",
+                url: "/newcourse",
+                data: post_data,
+                cache: false,
+                async: false,
+                success: function(e){
+                    if (e=="1"){
+                        layer.msg("恭喜！添加成功。",{
+                            time: 1000
+                        },function(){
+                            parent.location.reload();
+                        });
+                    } else if (e=="-1"){
+                        layer.msg("此课程已经添加了，请不要重复添加。")
+                    } else {
+                        layer.msg("Sorry!没能添加，请重试。")
+                    }
+                },
+                error: function(e){
+                    layer.msg("操作失败，请检查网络。")
+                }
+            }
+            ) 
+        } else {
+            layer.msg("没有认真填写各项，再来一边。")
+        }
+    })
+})

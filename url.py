@@ -20,6 +20,10 @@ from handlers.admin_courses import AdminCourseHandler
 from handlers.admin_courses import AdminNewCourseHandler
 from handlers.admin_courses import AdminDispCourseHandler
 
+from handlers.admin_lessons import AdminLessonHandler
+from handlers.admin_lessons import AdminNewLessonHandler
+
+
 url=[
     (r'/', IndexHandler),                    # the index page
     (r'/login', LoginHandler),               # the administrator login into the web
@@ -35,5 +39,7 @@ url=[
     (r'/course', AdminCourseHandler),        # the list of courses.
     (r'/newcourse', AdminNewCourseHandler),  # add a new course.
     (r'/dispcourse', AdminDispCourseHandler), #display the all information of the course
-
+    
+    (r'/lesson', AdminLessonHandler),        # the list of lessons.
+    (r'/newlesson', AdminNewLessonHandler),  # add a new lesson.
     ]
